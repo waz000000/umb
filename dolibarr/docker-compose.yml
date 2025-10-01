@@ -2,14 +2,11 @@ version: '3.7'
 services:
   app_proxy:
     environment:
-      APP_HOST: dolibarr-suite_server_1
+      APP_HOST: dolibarr_web_1
       APP_PORT: 9777
-    container_name: dolibarr_app_proxy_1
   server:
     image: upshift/dolibarr:latest
-    restart: unless-stopped
-    user: '1000:1000'
-    init: true
+    restart: on-failure
     depends_on:
       - dolibarr-suite_mariadb
     environment:
