@@ -22,6 +22,7 @@ services:
       TZ: Europe/Brussels
       LANG: fr_FR
       DOLI_HTTPS: yourlocalhost
+      PORT: 9777
     volumes:
       - ${APP_DATA_DIR}/data/dolibarr_html:/var/www/html
       - ${APP_DATA_DIR}/data/dolibarr_docs:/var/www/documents
@@ -41,6 +42,7 @@ services:
       MARIADB_ROOT_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root
       MYSQL_RANDOM_ROOT_PASSWORD: 'no'
+      PORT: 3306
     container_name: dolibarr_dolibarr-suite_mariadb_1
   dolibarr-suite_phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -48,8 +50,5 @@ services:
     environment:
       PMA_HOST: dolibarr-suite_mariadb
       MYSQL_ROOT_PASSWORD: root
+      PORT:8300
     container_name: dolibarr_dolibarr-suite_phpmyadmin_1
-volumes:
-  mariadb_data: null
-  dolibarr_html: null
-  dolibarr_docs: null
