@@ -18,8 +18,8 @@ services:
       DOLI_DB_PASSWORD: dolibarr
       TZ: Europe/Brussels
       LANG: fr_FR
-      DOLI_HTTPS: ${DEVICE_HOSTNAME}
-      PORT: 80
+   #   DOLI_HTTPS: ${DEVICE_HOSTNAME}
+    #  PORT: 80
     volumes:
       - ${APP_DATA_DIR}/data/dolibarr_html:/var/www/html
       - ${APP_DATA_DIR}/data/dolibarr_docs:/var/www/documents
