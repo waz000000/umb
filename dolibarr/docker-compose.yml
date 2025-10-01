@@ -19,7 +19,7 @@ services:
       TZ: Europe/Brussels
       LANG: fr_FR
      # DOLI_HTTPS: yourlocalhost
-      PORT: 9777
+      # PORT: 9777
     volumes:
       - ${APP_DATA_DIR}/data/dolibarr_html:/var/www/html
       - ${APP_DATA_DIR}/data/dolibarr_docs:/var/www/documents
