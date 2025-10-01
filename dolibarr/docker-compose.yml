@@ -44,7 +44,7 @@ services:
     environment:
       PMA_HOST: dolibarr-suite_mariadb
       MYSQL_ROOT_PASSWORD: root
-      PORT: 8300
+      PORT: 8300:80
     container_name: phpmyadmin
 volumes:
   mariadb_data: null
