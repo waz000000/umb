@@ -1,7 +1,33 @@
-version: '3'
+version: "3.7"
 
 services:
-  mariadb:
+  app_proxy:
+    environment:
+      APP_HOST: dolibarr-suite_server_1
+      APP_PORT: 8080
+
+  server:
+    image: upshift/dolibarr:latest
+    restart: unless-stopped
+    user: "1000:1000"
+    init: true
+    depends_on:
+      - dolibarr-suite_mariadb
+    environment:
+      DOLI_ADMIN_LOGIN: admin
+      DOLI_ADMIN_PASSWORD: admin
+      DOLI_DB_HOST: dolibarr-suite_mariadb
+      DOLI_DB_NAME: dolibarr
+      DOLI_DB_USER: dolibarr
+      DOLI_DB_PASSWORD: dolibarr
+      TZ: Europe/Brussels
+      LANG: fr_FR
+      DOLI_HTTPS: yourlocalhost
+    volumes:
+      - dolibarr_html:/var/www/html
+      - dolibarr_docs:/var/www/documents
+
+  dolibarr-suite_mariadb:
     image: mariadb:latest
     restart: unless-stopped
     command: --character_set_client=utf8 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
@@ -15,30 +41,11 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_RANDOM_ROOT_PASSWORD: no
 
-  dolibarr:
-    image: upshift/dolibarr:latest
-    restart: unless-stopped
-    depends_on:
-      - mariadb
-    environment:
-      DOLI_ADMIN_LOGIN: admin
-      DOLI_ADMIN_PASSWORD: admin
-      DOLI_DB_HOST: mariadb
-      DOLI_DB_NAME: dolibarr
-      DOLI_DB_USER: dolibarr
-      DOLI_DB_PASSWORD: dolibarr
-      TZ: Europe/Brussels
-      LANG: fr_FR
-      DOLI_HTTPS: yourlocalhost
-    volumes:
-      - dolibarr_html:/var/www/html
-      - dolibarr_docs:/var/www/documents
-
-  phpmyadmin:
+  dolibarr-suite_phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     restart: unless-stopped
     environment:
-      PMA_HOST: mariadb
+      PMA_HOST: dolibarr-suite_mariadb
       MYSQL_ROOT_PASSWORD: root
 
 volumes:
