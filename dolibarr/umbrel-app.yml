@@ -1,11 +1,11 @@
 manifestVersion: 1
 id: dolibarr
 name: dolibarr
-tagline: Replace this tagline with your app's tagline
+tagline: v2
 icon: https://svgur.com/i/mvA.svg
 category: Development
 version: "1.0.0"
-port: 4000
+port: 9777
 description: >-
   Add your app's description here.
 
