@@ -13,7 +13,7 @@ services:
     environment:
       DOLI_ADMIN_LOGIN: admin
       DOLI_ADMIN_PASSWORD: admin
-      DOLI_DB_HOST: dmariadb
+      DOLI_DB_HOST: dolibarr-suite_mariadb
       DOLI_DB_NAME: dolibarr
       DOLI_DB_USER: dolibarr
       DOLI_DB_PASSWORD: dolibarr
@@ -42,7 +42,7 @@ services:
     image: phpmyadmin/phpmyadmin:latest
     restart: unless-stopped
     environment:
-      PMA_HOST: mariadb
+      PMA_HOST: dolibarr-suite_mariadb
       MYSQL_ROOT_PASSWORD: root
       PORT: 8300
     container_name: phpmyadmin
