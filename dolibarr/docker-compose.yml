@@ -1,15 +1,14 @@
-version: "3.7"
-
+version: '3.7'
 services:
   app_proxy:
     environment:
       APP_HOST: dolibarr-suite_server_1
       APP_PORT: 9777
-
+    container_name: dolibarr_app_proxy_1
   server:
     image: upshift/dolibarr:latest
     restart: unless-stopped
-    user: "1000:1000"
+    user: '1000:1000'
     init: true
     depends_on:
       - dolibarr-suite_mariadb
@@ -26,29 +25,31 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data/dolibarr_html:/var/www/html
       - ${APP_DATA_DIR}/data/dolibarr_docs:/var/www/documents
-
+    container_name: dolibarr_server_1
   dolibarr-suite_mariadb:
     image: mariadb:latest
     restart: unless-stopped
-    command: --character_set_client=utf8 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    command: >-
+      --character_set_client=utf8 --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
     volumes:
       - ${APP_DATA_DIR}/data/mariadb_data:/var/lib/mysql
-      environment:
+    environment:
       MYSQL_DATABASE: dolibarr
       MYSQL_USER: dolibarr
       MYSQL_PASSWORD: dolibarr
       MARIADB_ROOT_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_RANDOM_ROOT_PASSWORD: no
-
+      MYSQL_RANDOM_ROOT_PASSWORD: 'no'
+    container_name: dolibarr_dolibarr-suite_mariadb_1
   dolibarr-suite_phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     restart: unless-stopped
     environment:
       PMA_HOST: dolibarr-suite_mariadb
       MYSQL_ROOT_PASSWORD: root
-
+    container_name: dolibarr_dolibarr-suite_phpmyadmin_1
 volumes:
-  mariadb_data:
-  dolibarr_html:
-  dolibarr_docs:
+  mariadb_data: null
+  dolibarr_html: null
+  dolibarr_docs: null
