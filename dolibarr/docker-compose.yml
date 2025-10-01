@@ -3,7 +3,7 @@ services:
   app_proxy:
     environment:
       APP_HOST: dolibarr_web_1
-      APP_PORT: 9777
+      APP_PORT: 80
   web:
     image: upshift/dolibarr:latest
     restart: on-failure
@@ -19,7 +19,7 @@ services:
       TZ: Europe/Brussels
       LANG: fr_FR
       DOLI_HTTPS: ${DEVICE_HOSTNAME}
-      # PORT: 9777
+      PORT: 80
     volumes:
       - ${APP_DATA_DIR}/data/dolibarr_html:/var/www/html
       - ${APP_DATA_DIR}/data/dolibarr_docs:/var/www/documents
