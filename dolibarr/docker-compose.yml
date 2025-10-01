@@ -4,7 +4,7 @@ services:
   app_proxy:
     environment:
       APP_HOST: dolibarr-suite_server_1
-      APP_PORT: 8080
+      APP_PORT: 9777
 
   server:
     image: upshift/dolibarr:latest
