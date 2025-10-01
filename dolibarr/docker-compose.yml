@@ -9,7 +9,7 @@ services:
     image: upshift/dolibarr:latest
     restart: on-failure
     depends_on:
-      - mariadb
+      - dolibarr-suite_mariadb
     environment:
       DOLI_ADMIN_LOGIN: admin
       DOLI_ADMIN_PASSWORD: admin
