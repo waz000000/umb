@@ -2,11 +2,10 @@ version: '3.7'
 services:
   app_proxy:
     environment:
-      APP_HOST: dolibarr_web_1
+      APP_HOST: dolibarr_server_1
       APP_PORT: 88
       container_name: dolibarr_app_proxy_1
-    container_name: dolibarr_app_proxy_1
-  web:
+  server:
     image: upshift/dolibarr:latest
     restart: on-failure
     depends_on:
@@ -14,15 +13,14 @@ services:
     environment:
       DOLI_ADMIN_LOGIN: admin
       DOLI_ADMIN_PASSWORD: admin
-      DOLI_DB_HOST: localhost
+      DOLI_DB_HOST: dolibarr_dolibarr-suite_mariadb_1
       DOLI_DB_NAME: dolibarr
       DOLI_DB_USER: dolibarr
       DOLI_DB_PASSWORD: dolibarr
     volumes:
       - ${APP_DATA_DIR}/data/dolibarr_html:/var/www/html
       - ${APP_DATA_DIR}/data/dolibarr_docs:/var/www/documents
-    container_name: dolibarr_web_1
-  dolibarr-suite_mariadb:
+    container_name: dolibarr-suite_mariadb
     image: mariadb:latest
     restart: unless-stopped
     command: >-
