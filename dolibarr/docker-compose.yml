@@ -24,15 +24,15 @@ services:
       LANG: fr_FR
       DOLI_HTTPS: yourlocalhost
     volumes:
-      - ${APP_DATA_DIR}/data/dolibarr_html:/var/www/html
-      - ${APP_DATA_DIR}/data/dolibarr_docs:/var/www/documents
+      - ${APP_DATA_DIR}/data/dolibarr_html/var/www/html:html
+      - ${APP_DATA_DIR}/data/dolibarr_docs/var/www/documents:documents
 
   dolibarr-suite_mariadb:
     image: mariadb:latest
     restart: unless-stopped
     command: --character_set_client=utf8 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
-      - ${APP_DATA_DIR}/data/mariadb_data:/var/lib/mysql
+      - ${APP_DATA_DIR}/data/mariadb_data/var/lib/mysql:mysql
     environment:
       MYSQL_DATABASE: dolibarr
       MYSQL_USER: dolibarr
