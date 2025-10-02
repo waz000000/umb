@@ -6,7 +6,7 @@ services:
       APP_PORT: 88
       container_name: dolibarr_app_proxy_1
   server:
-    image: upshift/dolibarr:latest
+    image: dolibarr/dolibarr:latest
     restart: on-failure
     depends_on:
       - dolibarr-suite_mariadb
