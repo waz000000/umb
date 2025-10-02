@@ -13,7 +13,7 @@ services:
     environment:
       DOLI_ADMIN_LOGIN: admin
       DOLI_ADMIN_PASSWORD: admin
-      DOLI_DB_HOST: dolibarr-suite_mariadb
+      DOLI_DB_HOST: mariadb
       DOLI_DB_NAME: dolibarr
       DOLI_DB_USER: dolibarr
       DOLI_DB_PASSWORD: dolibarr
@@ -22,7 +22,7 @@ services:
       - ${APP_DATA_DIR}/data/dolibarr_docs:/var/www/documents
       - ${APP_DATA_DIR}/data/dolibarr_scripts:/var/www/scripts
     container_name: dolibarr_server_1
-    dolibarr-suite_mariadb:
+  dolibarr-suite_mariadb:
     image: mariadb:latest
     restart: unless-stopped
     command: >-
