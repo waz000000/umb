@@ -21,6 +21,7 @@ services:
       - ${APP_DATA_DIR}/data/volume-scriptss:/var/www/scripts/docker-init.d
       - ${APP_DATA_DIR}/data/before-starting-scripts:/var/www/scripts/before-starting.d
       - ${APP_DATA_DIR}/data/dolibarr_docs:/var/www/documents
+      - ${APP_DATA_DIR}/data/dolibarr_www:/var/www
     container_name: dolibarr_server_1
   dolibarr-suite_mariadb:
     image: mariadb:latest
@@ -47,7 +48,6 @@ services:
       MYSQL_ROOT_PASSWORD: root
       PORT: 8300:80
     container_name: phpmyadmin
-volumes:
-  mariadb_data: null
-  dolibarr_html: null
-  dolibarr_docs: null
+#volumes:
+ # dolibarr_www: null
+  #dolibarr_docs: null
