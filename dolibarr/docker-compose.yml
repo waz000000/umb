@@ -7,13 +7,13 @@ services:
       container_name: dolibarr
     container_name: dolibarr_app_proxy_1
   server:
-    image: upshift/dolibarr:22.0.2
+    image: dolibarr/dolibarr:latest
     restart: on-failure
     depends_on:
       - dolibarr-suite_mariadb
     environment:
-      DOLI_ADMIN_LOGIN: "${DOLI_ADMIN_LOGIN:-admin}"
-      DOLI_ADMIN_PASSWORD: "${DOLI_ADMIN_PASSWORD:-admin}"
+      DOLI_ADMIN_LOGIN: ${DOLI_ADMIN_LOGIN:-admin}
+      DOLI_ADMIN_PASSWORD: ${DOLI_ADMIN_PASSWORD:-admin}
       DOLI_DB_HOST: ${DOLI_DB_HOST:-mariadb}
       DOLI_DB_NAME: ${DOLI_DB_NAME:-dolidb}
       DOLI_DB_USER: ${DOLI_DB_USER:-dolidbuser}
@@ -41,7 +41,3 @@ services:
       MYSQL_ROOT_PASSWORD: root
       PORT: '8300:80'
     container_name: phpmyadmin
-volumes:
-  mariadb_data: null
-  dolibarr_html: null
-  dolibarr_docs: null
