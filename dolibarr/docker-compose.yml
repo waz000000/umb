@@ -21,6 +21,7 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data/dolibarr_html:/var/www/html
       - ${APP_DATA_DIR}/data/dolibarr_docs:/var/www/documents
+      - ${APP_DATA_DIR}/volume-scripts:/var/www/scripts/docker-init.d
     container_name: dolibarr_server_1
   dolibarr-suite_mariadb:
     image: mariadb:latest
