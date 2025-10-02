@@ -21,14 +21,13 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data/dolibarr_html:/var/www/html
       - ${APP_DATA_DIR}/data/dolibarr_docs:/var/www/documents
-      - ${APP_DATA_DIR}/data/dolibarr_scripts:/var/www/scripts
     container_name: dolibarr_server_1
   dolibarr-suite_mariadb:
     image: mariadb:latest
     restart: unless-stopped
-    command: >-
-      --character_set_client=utf8 --character-set-server=utf8mb4
-      --collation-server=utf8mb4_unicode_ci
+   # command: >-
+    #  --character_set_client=utf8 --character-set-server=utf8mb4
+     # --collation-server=utf8mb4_unicode_ci
     volumes:
       - ${APP_DATA_DIR}/data/mariadb_data:/var/lib/mysql
     environment:
@@ -44,12 +43,11 @@ services:
     image: phpmyadmin/phpmyadmin:latest
     restart: unless-stopped
     environment:
-      PMA_HOST: dolibarr-suite_mariadb
+      PMA_HOST: mariadb
       MYSQL_ROOT_PASSWORD: root
       PORT: 8300:80
-    container_name: dolibarr_dolibarr-suite_phpmyadmin_1
+    container_name: phpmyadmin
 volumes:
   mariadb_data: null
   dolibarr_html: null
   dolibarr_docs: null
-  dolibarr_scripts: null
