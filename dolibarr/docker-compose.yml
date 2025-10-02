@@ -19,8 +19,8 @@ services:
       DOLI_DB_USER: dolibarr
       DOLI_DB_PASSWORD: dolibarr
     volumes:
-      - ${APP_DATA_DIR}/data/volume-scriptss:/var/www/scripts/docker-init.d
-      - ${APP_DATA_DIR}/data/before-starting-scripts:/var/www/scripts/before-starting.d
+      - ${APP_DATA_DIR}/data/dolibarr_html:/var/www/html
+      - ${APP_DATA_DIR}/data/dolibarr_docs:/var/www/documents
     container_name: dolibarr_server_1
   dolibarr-suite_mariadb:
     image: mariadb:latest
