@@ -5,11 +5,10 @@ services:
       APP_HOST: dolibarr_server_1
       APP_PORT: 88
       container_name: dolibarr
+    container_name: dolibarr_app_proxy_1
   server:
     image: dolibarr/dolibarr:latest
     restart: on-failure
-   # depends_on:
-    #  - dolibarr-suite_mariadb
     environment:
       DOLI_ADMIN_LOGIN: admin
       DOLI_ADMIN_PASSWORD: admin
@@ -39,3 +38,16 @@ services:
       MYSQL_RANDOM_ROOT_PASSWORD: 'no'
       PORT: 3306
     container_name: mariadb
+  dolibarr-suite_phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: unless-stopped
+    environment:
+      PMA_HOST: dolibarr-suite_mariadb
+      MYSQL_ROOT_PASSWORD: root
+      PORT: 8300:80
+    container_name: phpmyadmin
+volumes:
+  mariadb_data: null
+  dolibarr_html: null
+  dolibarr_docs: null
+  dolibarr_scripts: null
