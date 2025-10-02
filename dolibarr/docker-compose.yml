@@ -25,7 +25,10 @@ services:
   dolibarr-suite_mariadb:
     image: mariadb:latest
     restart: unless-stopped
-     volumes:
+    command: >-
+      --character_set_client=utf8 --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+    volumes:
       - ${APP_DATA_DIR}/data/mariadb_data:/var/lib/mysql
     environment:
       MYSQL_DATABASE: dolibarr
