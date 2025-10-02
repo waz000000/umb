@@ -4,39 +4,49 @@ services:
     environment:
       APP_HOST: dolibarr_server_1
       APP_PORT: 88
-    container_name: dolibarr_app_proxy_1
+      container_name: dolibarr_app_proxy_1
   server:
     image: dolibarr/dolibarr:latest
     restart: on-failure
     depends_on:
       - dolibarr-suite_mariadb
     environment:
-      DOLI_ADMIN_LOGIN: ${DOLI_ADMIN_LOGIN:-admin}
-      DOLI_ADMIN_PASSWORD: ${DOLI_ADMIN_PASSWORD:-admin}
-      DOLI_DB_HOST: ${DOLI_DB_HOST:-mariadb}
-      DOLI_DB_NAME: ${DOLI_DB_NAME:-dolidb}
-      DOLI_DB_USER: ${DOLI_DB_USER:-dolidbuser}
-      DOLI_DB_PASSWORD: ${DOLI_DB_PASSWORD:-dolidbpass}
+      DOLI_ADMIN_LOGIN: admin
+      DOLI_ADMIN_PASSWORD: admin
+      DOLI_DB_HOST: mariadb
+      DOLI_DB_NAME: dolibarr
+      DOLI_DB_USER: dolibarr
+      DOLI_DB_PASSWORD: dolibarr
     volumes:
-      - ${APP_DATA_DIR}/data/scripts:/var/www/scripts/docker-init.d
-      - ${APP_DATA_DIR}/data/before:/var/www/scripts/before-starting.d
+      - ${APP_DATA_DIR}/data/dolibarr_scripts:/var/www/scripts/docker-init.d
+      - ${APP_DATA_DIR}/data/dolibarr_run:/var/www/scripts/before-starting.d
     container_name: dolibarr_server_1
-    dolibarr-suite_mariadb:
+  dolibarr-suite_mariadb:
     image: mariadb:latest
     restart: unless-stopped
+    command: >-
+      --character_set_client=utf8 --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
     volumes:
       - ${APP_DATA_DIR}/data/mariadb_data:/var/lib/mysql
-   environment:
-     MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
-     MYSQL_DATABASE: ${MYSQL_DATABASE:-dolidb}
-     MYSQL_USER: ${MYSQL_USER:-dolidbuser}
-     MYSQL_PASSWORD: ${MYSQL_PASSWORD:-dolidbpass}
+    environment:
+      MYSQL_DATABASE: dolibarr
+      MYSQL_USER: dolibarr
+      MYSQL_PASSWORD: dolibarr
+      MARIADB_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_RANDOM_ROOT_PASSWORD: 'no'
+      PORT: 3306
     container_name: mariadb
   dolibarr-suite_phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     restart: unless-stopped
     environment:
-      PMA_HOST: mariadb
+      PMA_HOST: dolibarr-suite_mariadb
       MYSQL_ROOT_PASSWORD: root
-      PORT: '8300:80'
+      PORT: 8300:80
     container_name: phpmyadmin
+volumes:
+  mariadb_data: null
+  dolibarr_html: null
+  dolibarr_docs: null
