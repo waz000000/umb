@@ -11,7 +11,7 @@ services:
     depends_on:
       - dolibarr-suite_mariadb
     environment:
-     DOLI_INSTALL_AUTO: 0
+      DOLI_INSTALL_AUTO: "0"
       DOLI_ADMIN_LOGIN: admin
       DOLI_ADMIN_PASSWORD: admin
       DOLI_DB_HOST: mariadb
