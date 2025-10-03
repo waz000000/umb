@@ -19,16 +19,12 @@ services:
       DOLI_DB_USER: dolibarr
       DOLI_DB_PASSWORD: dolibarr
     volumes:
-      - ${APP_DATA_DIR}/data/volume-scripts:/var/www/scripts/docker-init.d
+      - ${APP_DATA_DIR}/data/dolibarr_documents:/var/www/documents
+      - ${APP_DATA_DIR}/data/dolibarr_custom:/var/www/html/custom
     container_name: dolibarr_server_1
   dolibarr-suite_mariadb:
     image: mariadb:latest
-    restart: unless-stopped
-    command: >-
-      --character_set_client=utf8 --character-set-server=utf8mb4
-      --collation-server=utf8mb4_unicode_ci
-    volumes:
-      - ${APP_DATA_DIR}/data/mariadb_data:/var/lib/mysql
+    restart: unless-stopped  
     environment:
       MYSQL_DATABASE: dolibarr
       MYSQL_USER: dolibarr
@@ -37,6 +33,8 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_RANDOM_ROOT_PASSWORD: 'no'
       PORT: 3306
+    volumes:
+      - ${APP_DATA_DIR}/data/dolibarr_mariadb:/var/lib/mysql
     container_name: mariadb
   dolibarr-suite_phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -45,4 +43,6 @@ services:
       PMA_HOST: dolibarr-suite_mariadb
       MYSQL_ROOT_PASSWORD: root
       PORT: 8300:80
+    volumes:
+     - ${APP_DATA_DIR}/data/dolibarr_phpmyadmin:/var/www/html/phpmyadmin
     container_name: phpmyadmin
