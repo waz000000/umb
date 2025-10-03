@@ -26,6 +26,9 @@ services:
     image: mariadb:latest
     container_name: dolibarr_mariadb_1
     restart: unless-stopped
+    command: >-
+      --character_set_client=utf8 --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
     environment:
       MYSQL_DATABASE: dolibarr
       MYSQL_USER: dolibarr
