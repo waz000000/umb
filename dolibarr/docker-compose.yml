@@ -3,10 +3,10 @@ version: "3.7"
 services:
   app_proxy:
     environment:
-      APP_HOST: dolibarr_server_1
+      APP_HOST: dolibarr_web_1
       APP_PORT: 88
       container_name: dolibarr_app_proxy_1
-  server:
+  web:
     image: monogramm/docker-dolibarr
     restart: unless-stopped
     environment:
