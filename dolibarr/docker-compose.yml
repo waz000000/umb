@@ -13,7 +13,7 @@ services:
       PORT: 3306
     volumes:
       - ${APP_DATA_DIR}/data/dolibarr_mariadb:/var/lib/mysql
-      
+   
    server:
     image: dolibarr/dolibarr:latest
     restart: on-failure
@@ -28,5 +28,4 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data/dolibarr_documents:/var/www/documents
       - ${APP_DATA_DIR}/data/dolibarr_custom:/var/www/html/custom
-    container_name: dolibarr_server_1
 
