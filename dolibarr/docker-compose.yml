@@ -1,21 +1,15 @@
-version: '3.7'
-
 services:
-  mariadb:
-    image: mariadb:latest
-    restart: unless-stopped
+  app_proxy:
     environment:
-      MYSQL_DATABASE: dolibarr
-      MYSQL_USER: dolibarr
-      MYSQL_PASSWORD: dolibarr
-      MARIADB_ROOT_PASSWORD: root
-    volumes:
-      - ${APP_DATA_DIR}/data/dolibarr_mariadb:/var/lib/mysql
+      APP_HOST: dolibarr_server_1
+      APP_PORT: 88
 
   server:
     image: dolibarr/dolibarr:latest
     container_name: dolibarr_server_1
     restart: on-failure
+    depends_on:
+      - mariadb
     environment:
       DOLI_INSTALL_AUTO: "0"
       DOLI_ADMIN_LOGIN: admin
@@ -25,7 +19,17 @@ services:
       DOLI_DB_USER: dolibarr
       DOLI_DB_PASSWORD: dolibarr
     volumes:
-      - ${APP_DATA_DIR}/data/dolibarr_documents:/var/www/documents
-      - ${APP_DATA_DIR}/data/dolibarr_custom:/var/www/html/custom
-    depends_on:
-      - mariadb
+      - ${APP_DATA_DIR}data/documents:/var/www/documents
+      - ${APP_DATA_DIR}data/custom:/var/www/html/custom
+
+  mariadb:
+    image: mariadb:latest
+    container_name: dolibarr_mariadb_1
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: dolibarr
+      MYSQL_USER: dolibarr
+      MYSQL_PASSWORD: dolibarr
+      MARIADB_ROOT_PASSWORD: root
+    volumes:
+      - ${APP_DATA_DIR}data/mariadb:/var/lib/mysql
