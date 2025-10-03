@@ -27,5 +27,4 @@ services:
       - ${APP_DATA_DIR}/data/dolibarr_documents:/var/www/documents
       - ${APP_DATA_DIR}/data/dolibarr_custom:/var/www/html/custom
       - ${APP_DATA_DIR}/data/dolibarr_mariadb:/var/lib/mysql
-      - ${APP_DATA_DIR}/data/dolibarr_mariadb:/var/lib/mysql
 container_name: dolibarr_server_1
