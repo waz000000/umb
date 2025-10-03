@@ -19,8 +19,8 @@ services:
       DOLI_DB_USER: dolibarr
       DOLI_DB_PASSWORD: dolibarr
     volumes:
-      - ${APP_DATA_DIR}data/documents:/var/www/documents
-      - ${APP_DATA_DIR}data/custom:/var/www/html/custom
+      - ${APP_DATA_DIR}/data/documents:/var/www/documents
+      - ${APP_DATA_DIR}/data/custom:/var/www/html/custom
 
   mariadb:
     image: mariadb:latest
@@ -32,4 +32,4 @@ services:
       MYSQL_PASSWORD: dolibarr
       MARIADB_ROOT_PASSWORD: root
     volumes:
-      - ${APP_DATA_DIR}data/mariadb:/var/lib/mysql
+      - ${APP_DATA_DIR}/data/mariadb:/var/lib/mysql
