@@ -34,5 +34,7 @@ services:
       MYSQL_USER: dolibarr
       MYSQL_PASSWORD: dolibarr
       MARIADB_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_RANDOM_ROOT_PASSWORD: 'no'
     volumes:
       - ${APP_DATA_DIR}/data/mariadb:/var/lib/mysql
