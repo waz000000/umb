@@ -12,4 +12,4 @@ services:
       - ${APP_DATA_DIR}/config:/var/www/html/conf
       - ${APP_DATA_DIR}/theme:/var/www/html/theme/YOUR_CUSTOM_THEME
     ports:
-      - 80:80
+      - 88:88
