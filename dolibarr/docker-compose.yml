@@ -5,7 +5,6 @@ services:
       APP_HOST: dolibarr_web_1
       APP_PORT: 88
       container_name: dolibarr_app_proxy_1
-    container_name: dolibarr_app_proxy_1
   web:
     image: upshift/dolibarr:latest
     restart: on-failure
