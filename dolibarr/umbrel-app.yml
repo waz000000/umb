@@ -26,6 +26,6 @@ gallery:
 releaseNotes: >-
   Add what's new in the latest version of your app here.
 dependencies: []
-path: "//dolibarr/dolibarr"
+#path: "//dolibarr/dolibarr"
 defaultUsername: ""
 defaultPassword: ""
