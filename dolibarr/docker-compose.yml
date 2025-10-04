@@ -7,7 +7,7 @@ services:
       APP_PORT: 88
       container_name: dolibarr
       
-  web:
+  server:
     image: upshift/dolibarr:latest
     restart: unless-stopped
     user: "1000:1000"
@@ -27,6 +27,7 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data/dolibarr_html:/var/www/html
       - ${APP_DATA_DIR}/data/dolibarr_docs:/var/www/documents
+        container_name: dolibarr_server_1
 
   dolibarr-suite_mariadb:
     image: mariadb:latest
