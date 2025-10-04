@@ -3,10 +3,10 @@ version: "3.7"
 services:
   app_proxy:
     environment:
-      APP_HOST: dolibarr-suite_server_1
+      APP_HOST: dolibarr_web_1
       APP_PORT: 88
 
-  server:
+  web:
     image: upshift/dolibarr:latest
     restart: unless-stopped
     user: "1000:1000"
